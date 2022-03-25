@@ -32,6 +32,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_tasksListFragment_to_createTaskDialogFragment"
+            app:destination="@id/createTaskDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailsFragment"
@@ -42,4 +45,8 @@
             android:name="id"
             app:argType="long" />
     </fragment>
+    <dialog
+        android:id="@+id/createTaskDialogFragment"
+        android:name="com.suonk.tasks_manager.ui.tasks.create.CreateTaskDialogFragment"
+        android:label="CreateTaskDialogFragment" />
 </navigation>

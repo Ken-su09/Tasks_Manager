@@ -1,24 +1,34 @@
 package com.suonk.tasks_manager.use_case.tasks
 
-import com.suonk.tasks_manager.model.data.InvalidTaskException
+import android.util.Log
 import com.suonk.tasks_manager.model.data.Task
 import com.suonk.tasks_manager.repositories.tasks.TaskRepository
-import com.suonk.tasks_manager.ui.tasks.lists.TasksViewState
+import com.suonk.tasks_manager.ui.tasks.create.CreateTaskViewState
 import javax.inject.Inject
 
-class InsertTask @Inject constructor(private val repository: TaskRepository) {
+class InsertTask @Inject constructor(private val taskRepository: TaskRepository) {
 
-    @Throws(InvalidTaskException::class)
-    suspend operator fun invoke(tasksViewState: TasksViewState) {
-        if (tasksViewState.taskName.isBlank() && tasksViewState.projectName.isBlank()) {
-            throw InvalidTaskException("The task name can not be empty.")
+    suspend operator fun invoke(createTaskViewState: CreateTaskViewState) {
+        val projectId = when (createTaskViewState.projectName) {
+            "Project Tartampion" -> {
+                1L
+            }
+            "Project Lucidia" -> {
+                2L
+            }
+            "Project Circus" -> {
+                3L
+            }
+            else -> {
+                1L
+            }
         }
 
-        return repository.insertTask(
+        Log.i("taskName", "${createTaskViewState.taskName}")
+        taskRepository.insertTask(
             Task(
-                tasksViewState.taskName,
-                tasksViewState.creationTimestamp,
-                0
+                createTaskViewState.taskName,
+                projectId
             )
         )
     }

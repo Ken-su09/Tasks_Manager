@@ -1,11 +1,11 @@
 package com.suonk.tasks_manager.ui.tasks.lists
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.suonk.tasks_manager.R
 import com.suonk.tasks_manager.databinding.ItemTaskBinding
 
 class TasksListAdapter(private val onClickedCallback: (Int, Int) -> Unit) :
@@ -31,9 +31,9 @@ class TasksListAdapter(private val onClickedCallback: (Int, Int) -> Unit) :
         fun onBind(task: TasksViewState, onClicked: (Int, Int) -> Unit) {
             binding.apply {
                 taskName.text = task.taskName
-                projectName.text = task.projectName
+                imgProject.setImageResource(task.color)
 
-                root.setOnClickListener {
+                itemRoot.setOnClickListener {
                     onClicked(it.id, task.id.toInt())
                 }
 
@@ -50,9 +50,9 @@ class TasksListAdapter(private val onClickedCallback: (Int, Int) -> Unit) :
         }
 
         override fun areContentsTheSame(oldItem: TasksViewState, newItem: TasksViewState): Boolean {
-            return oldItem.projectName == newItem.projectName &&
-                    oldItem.taskName == newItem.taskName
+            return oldItem.id == newItem.id &&
+                    oldItem.taskName == newItem.taskName &&
+                    oldItem.color == newItem.color
         }
-
     }
 }
