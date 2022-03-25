@@ -8,7 +8,6 @@ import javax.inject.Inject
 class TaskRepositoryImpl @Inject constructor(private val dao: TaskDao) : TaskRepository {
 
     override fun getAllTasks() = dao.getAllTasks()
-
     override fun getTaskById(id: Long) = dao.getTaskById(id)
 
     override suspend fun insertTask(task: Task) = dao.insertTask(task)
