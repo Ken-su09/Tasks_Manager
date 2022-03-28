@@ -21,7 +21,7 @@ class TasksViewModel @Inject constructor(
     private val getAllTasks = MediatorLiveData<List<TasksViewState>>()
     private val filterIdLiveData = MutableLiveData(R.id.sort_by_name)
 
-    private fun combine() {
+    private fun getListOfTasksFromUseCases() {
         getAllTasks.addSource(taskUseCases.getAllTasks.invoke().asLiveData()) { tasks ->
             viewModelScope.launch {
                 projectUseCases.getAllProjects.invoke().collect { projects ->
@@ -75,7 +75,7 @@ class TasksViewModel @Inject constructor(
     }
 
     fun getAllTasksViewState(): MutableLiveData<List<TasksViewState>> {
-        combine()
+        getListOfTasksFromUseCases()
         return getAllTasks
     }
 

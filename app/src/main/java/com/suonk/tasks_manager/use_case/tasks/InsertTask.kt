@@ -24,7 +24,6 @@ class InsertTask @Inject constructor(private val taskRepository: TaskRepository)
             }
         }
 
-        Log.i("taskName", "${createTaskViewState.taskName}")
         taskRepository.insertTask(
             Task(
                 createTaskViewState.taskName,
